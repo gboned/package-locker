@@ -14,12 +14,12 @@ def testPackage():
     assert packageInstance.getStatus() == 'NOT REGISTERED'
 
 
-    assert packageInstance.setId('PACK-222-333-444')
+    packageInstance.setId('PACK-222-333-444')
 
-    assert packageInstance.getId() == 'PACK-111-222-333'
+    assert packageInstance.getId() == 'PACK-222-333-444'
 
 
-    assert packageInstance.setStatus('KEEPING')
+    packageInstance.setStatus('KEEPING')
     
     assert packageInstance.getStatus() == 'KEEPING'
 
