@@ -21,4 +21,4 @@ class Package:
 
 
     def setStatus(self, newStatus):
-        self.status 
+        self.status = newStatus
