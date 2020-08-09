@@ -20,10 +20,15 @@ def testLockerPoint():
     )
 
 
+     # Creamos la instancia del punto de recogida
     lockerPointInstance = LockerPoint(
         'sr6cxt7v8fybw9n', # identificador
         'Calle de las Flores, 22', # dirección
-        [locker1, locker2] # lista de taquillas 
+        {   
+            # lista de taquillas 
+            locker1.getId(): locker1, # '1': locker1
+            locker2.getId(): locker2  # '2': locker2
+        }
     )
 
 
@@ -31,10 +36,10 @@ def testLockerPoint():
     assert lockerPointInstance.getId() == 'sr6cxt7v8fybw9n'
     assert lockerPointInstance.getAddress() == 'Calle de las Flores, 22'
     # Para comprobar que el id del primer locker de la lista de lockers del LockerPoint es 1
-    assert lockerPointInstance.getLockersList()[0].getId() == '1'
+    assert lockerPointInstance.getLockersList()['1'].getId() == '1'
 
-    lockerPointInstance.getLockersList()[0].setStatus('OPENED')
-    assert lockerPointInstance.getLockersList()[0].getStatus() == 'OPENED'
+    lockerPointInstance.getLockersList()['1'].setStatus('OPENED')
+    assert lockerPointInstance.getLockersList()['1'].getStatus() == 'OPENED'
 
 
 

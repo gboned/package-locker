@@ -24,19 +24,55 @@ def main():
     lockerPoint = LockerPoint(
         'sr6cxt7v8fybw9n', # identificador
         'Calle de las Flores, 22', # dirección
-        [locker1, locker2] # lista de taquillas 
+        {   # Diccionario de taquillas
+            locker1.getId(): locker1,
+            locker2.getId(): locker2       
+        }
+ 
     )
 
-    # Creamos un paquete para dejar...
+    # Creamos un paquete con un código válido, ...
     package1 = Package(
         'PACK-111-222-333', # código identificador
         'NOT REGISTERED', # estado
     )
-    # y otro para recoger
+    # otro con un código no válido...
     package2 = Package(
-        'PACK-165-997-232', # código identificador
+        'Pckr-00000000000', # código identificador
         'KEEPING', # estado
     )
+    # e intentamos recoger un packete que no se encuentra en el lockerPoint
+    package3 = Package(
+        'PACK-555-231-444', # código identificador
+        'KEEPING', # estado
+    )
+
+
+    print('Welcome!')
+
+    print('------------------------------------------------------------------')
+
+    # dejamos package1
+    LockerPoint.processPackage(lockerPoint, package1)
+
+    print('------------------------------------------------------------------')
+        
+    # recogemos package1
+    LockerPoint.processPackage(lockerPoint, package1)
+
+    print('------------------------------------------------------------------')
+
+    # probamos con un código no válido -con package2-
+    LockerPoint.processPackage(lockerPoint, package2)
+
+    print('------------------------------------------------------------------')
+    
+    # probamos con un paquete que no está en este lockerPoint 
+    LockerPoint.processPackage(lockerPoint, package3)
+
+    print('------------------------------------------------------------------')
+
+    print ('Bye!')
 
 
 
