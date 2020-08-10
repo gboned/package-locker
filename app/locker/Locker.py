@@ -1,10 +1,10 @@
 class Locker:
 
-    def __init__(self, id, status, isOccupied, packageCode):
+    def __init__(self, id, status, occupied, packageCode):
 
         self.id = id
         self.status = status
-        self.isOccupied = isOccupied
+        self.occupied = occupied
         self.packageCode = packageCode
 
 
@@ -27,12 +27,12 @@ class Locker:
 
 
 
-    def getIsOccupied(self):
-        return self.isOccupied
+    def isOccupied(self):
+        return self.occupied
     
 
-    def setIsOccupied(self, newIsOccupied):
-        self.isOccupied = newIsOccupied
+    def setOccupied(self, newOccupied):
+        self.occupied = newOccupied
 
 
 
