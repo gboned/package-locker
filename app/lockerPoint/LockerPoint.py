@@ -8,6 +8,11 @@ class LockerPoint:
 
 
 
+    def processPackage(self, lockerPoint, package):
+        Package.isValid(package.getId())
+        return True
+
+
     def getId(self):
         return self.id
 
