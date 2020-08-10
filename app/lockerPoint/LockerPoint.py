@@ -4,21 +4,31 @@ from app.package.Package import Package
 
 class LockerPoint:
 
-    def __init__(self, id, address, lockersList):
+    def __init__(self, id, address, lockers):
 
         self.id = id
         self.address = address
-        self.lockersList = lockersList
+        self.lockers = lockers
 
 
     @staticmethod
     def processPackage(lockerPoint, package):
         print('Processing package. . .')
         if Package.isValid(package.getId()): # Devuelve True o False
-            return True
+            if package.getStatus() == 'NOT REGISTERED':
+                LockerPoint.searchEmptyLockers(lockerPoint)
         else:
             print('Invalid code')
             print('Process terminated')
+
+
+    @staticmethod
+    def searchEmptyLockers(lockerPoint):
+        emptyLockers = []
+        for locker in lockerPoint.getLockers().values():
+            if not locker.isOccupied():
+                emptyLockers.append(locker)
+        return emptyLockers 
 
 
     def getId(self):
@@ -39,9 +49,9 @@ class LockerPoint:
 
     
 
-    def getLockersList(self):
-        return self.lockersList
+    def getLockers(self):
+        return self.lockers
 
 
-    def setLockersList(self, newLockersList):
-        self.lockersList = newLockersList
+    def setLockers(self, newLockers):
+        self.lockers = newLockers

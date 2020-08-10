@@ -36,11 +36,14 @@ def testLockerPoint():
     assert lockerPointInstance.getId() == 'sr6cxt7v8fybw9n'
     assert lockerPointInstance.getAddress() == 'Calle de las Flores, 22'
     # Para comprobar que el id del primer locker de la lista de lockers del LockerPoint es 1
-    assert lockerPointInstance.getLockersList()['1'].getId() == '1'
+    assert lockerPointInstance.getLockers()['1'].getId() == '1'
 
-    lockerPointInstance.getLockersList()['1'].setStatus('OPENED')
-    assert lockerPointInstance.getLockersList()['1'].getStatus() == 'OPENED'
-
+    lockerPointInstance.getLockers()['1'].setStatus('OPENED')
+    assert lockerPointInstance.getLockers()['1'].getStatus() == 'OPENED'
+    
+    locker1.setOccupied(True)
+    locker2.setOccupied(False)
+    assert len(LockerPoint.searchEmptyLockers(lockerPointInstance)) == 1
 
 
 if __name__ == '__main__':
