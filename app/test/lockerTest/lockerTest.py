@@ -14,7 +14,7 @@ def testLocker():
     assert lockerInstance != None
     assert lockerInstance.getId() == '1'
     assert lockerInstance.getStatus() == 'CLOSED'
-    assert not lockerInstance.isOccupied
+    assert not lockerInstance.isOccupied()
     assert lockerInstance.getPackageCode() == ''
 
 
@@ -22,9 +22,9 @@ def testLocker():
 
     assert lockerInstance.getStatus() == 'OPENED'
 
-    lockerInstance.setIsOccupied(True)
+    lockerInstance.setOccupied(True)
 
-    assert lockerInstance.isOccupied
+    assert lockerInstance.isOccupied()
 
     lockerInstance.setPackageCode('PACK-165-997-232')
 
