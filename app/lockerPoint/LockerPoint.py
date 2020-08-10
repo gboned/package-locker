@@ -1,3 +1,7 @@
+from app.package.Package import Package
+
+
+
 class LockerPoint:
 
     def __init__(self, id, address, lockersList):
@@ -7,10 +11,14 @@ class LockerPoint:
         self.lockersList = lockersList
 
 
-
-    def processPackage(self, lockerPoint, package):
-        Package.isValid(package.getId())
-        return True
+    @staticmethod
+    def processPackage(lockerPoint, package):
+        print('Processing package. . .')
+        if Package.isValid(package.getId()): # Devuelve True o False
+            return True
+        else:
+            print('Invalid code')
+            print('Process terminated')
 
 
     def getId(self):
