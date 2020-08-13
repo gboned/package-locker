@@ -14,23 +14,31 @@ class LockerPoint:
 
     @staticmethod
     def processPackage(lockerPoint, package):
+
         print('Processing package. . .')
 
         if Package.isValid(package.getId()): # Devuelve True o False
+
             if package.getStatus() == 'NOT REGISTERED':
+
                 emptyLockers = LockerPoint.searchEmptyLockers(lockerPoint)
+
                 # 4. Si existe alguna taquilla vacía, abrirla con setStatus('OPENED') 
                 print('Searching available lockers...')
+
                 if emptyLockers != None and len(emptyLockers) > 0:
+
                     emptyLockers[0].setStatus('OPENED')   
-                    print('Please, leave the package and close the locker before leave.') 
+                    print('Please, leave the package and close the locker before leave.')
+
                     # 6. Tras 20 segundos, cerrar la taquilla.
                     # y marcar el paquete como 'keeping'.
                     print('Closing the opened locker...')
                     time.sleep(5)
                     emptyLockers[0].setStatus('CLOSED')
                     package.setStatus('KEEPING')
-                    print('Process terminated.')    
+                    print('Process terminated.')
+
                 # 5. En caso contrario, imprimir por pantalla
                 else:
                     print('There aren\'t any free lockers available at the moment.')
