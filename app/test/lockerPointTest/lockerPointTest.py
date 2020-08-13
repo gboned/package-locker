@@ -1,6 +1,6 @@
 from app.locker.Locker import Locker
 from app.lockerPoint.LockerPoint import LockerPoint
-
+import time
 
 
 def testLockerPoint():
@@ -43,8 +43,14 @@ def testLockerPoint():
     
     locker1.setOccupied(True)
     locker2.setOccupied(False)
-    assert len(LockerPoint.searchEmptyLockers(lockerPointInstance)) == 1
+    emptyLockers = LockerPoint.searchEmptyLockers(lockerPointInstance)
+    assert len(emptyLockers) == 1
+    
+    assert emptyLockers[0].getId() == '2'
+    assert emptyLockers[0].isOccupied() == False
 
+    emptyLockers[0].setStatus('OPENED')
+    assert locker2.getStatus() == 'OPENED'
 
 if __name__ == '__main__':
     testLockerPoint()
