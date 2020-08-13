@@ -54,6 +54,9 @@ class LockerPoint:
                     keeper.setStatus('OPENED')
                     assert lockerPoint.getLockers()['1'].getStatus() == 'OPENED'
                     print('Please, take the package and close the locker before leave.')
+                else:
+                    print('The package you are looking for is not being kept here')
+                    print('Process terminated.')
         else:
             print('Invalid code')
             print('Process terminated')
