@@ -10,13 +10,13 @@ def testPackage():
     )
 
     assert packageInstance != None
-    assert packageInstance.getId() == 'PACK-111-222-333'
+    assert packageInstance.getCode() == 'PACK-111-222-333'
     assert packageInstance.getStatus() == 'NOT REGISTERED'
 
 
     packageInstance.setId('PACK-222-333-444')
 
-    assert packageInstance.getId() == 'PACK-222-333-444'
+    assert packageInstance.getCode() == 'PACK-222-333-444'
 
 
     packageInstance.setStatus('KEEPING')
@@ -40,11 +40,11 @@ def testIsValid():
         'KEEPING', # estado
     )
 
-    assert Package.isValid(packageInstance1.getId()) == True
+    assert Package.isValid(packageInstance1.getCode()) == True
 
-    assert Package.isValid(packageInstance2.getId()) == False
+    assert Package.isValid(packageInstance2.getCode()) == False
 
-    assert Package.isValid(packageInstance3.getId()) == True
+    assert Package.isValid(packageInstance3.getCode()) == True
 
 
 

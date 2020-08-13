@@ -1,8 +1,8 @@
 class Package:
 
-    def __init__(self, id, status):
+    def __init__(self, code, status):
 
-        self.id = id
+        self.code = code
         self.status = status
 
     @staticmethod
@@ -21,12 +21,12 @@ class Package:
             return False
     
 
-    def getId(self):
-        return self.id
+    def getCode(self):
+        return self.code
 
 
-    def setId(self, newId):
-        self.id = newId
+    def setCode(self, newCode):
+        self.code = newCode
 
 
 

@@ -1,5 +1,6 @@
 from app.locker.Locker import Locker
 from app.lockerPoint.LockerPoint import LockerPoint
+from app.package.Package import Package
 import time
 
 
@@ -41,7 +42,19 @@ def testLockerPoint():
     lockerPointInstance.getLockers()['1'].setStatus('OPENED')
     assert lockerPointInstance.getLockers()['1'].getStatus() == 'OPENED'
     
+    newPackage = Package(
+        'PACK-111-222-333', # código identificador
+        'NOT REGISTERED', # estado
+    )
+    # Guardar paquete en una de las taquillas
+    lockerPointInstance.getLockers()['1'].setPackageCode(newPackage.getCode())
+    newPackage.setStatus('KEEPING')
     locker1.setOccupied(True)
+
+    keeper = LockerPoint.searchPackage(lockerPointInstance, newPackage)
+    assert keeper != None
+    assert keeper.getId() == locker1.getId()
+
     locker2.setOccupied(False)
     emptyLockers = LockerPoint.searchEmptyLockers(lockerPointInstance)
     assert len(emptyLockers) == 1

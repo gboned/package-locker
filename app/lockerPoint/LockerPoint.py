@@ -17,7 +17,7 @@ class LockerPoint:
 
         print('Processing package. . .')
 
-        if Package.isValid(package.getId()): # Devuelve True o False
+        if Package.isValid(package.getCode()): # Devuelve True o False
 
             if package.getStatus() == 'NOT REGISTERED':
 
@@ -36,12 +36,24 @@ class LockerPoint:
                     print('Closing the opened locker...')
                     time.sleep(5)
                     emptyLockers[0].setStatus('CLOSED')
-                    package.setStatus('KEEPING')
-                    print('Process terminated.')
 
+                    lockerPoint.getLockers()['1'].setPackageCode(package.getCode())
+                    emptyLockers[0].setOccupied(True)
+                    package.setStatus('KEEPING')
+
+                    print('Process terminated.')
+            
                 # 5. En caso contrario, imprimir por pantalla
                 else:
                     print('There aren\'t any free lockers available at the moment.')
+            
+            elif package.getStatus() == 'KEEPING':
+                keeper = LockerPoint.searchPackage(lockerPoint, package)
+                if keeper != None:
+                    print('Opening the keeper locker...')
+                    keeper.setStatus('OPENED')
+                    assert lockerPoint.getLockers()['1'].getStatus() == 'OPENED'
+                    print('Please, take the package and close the locker before leave.')
         else:
             print('Invalid code')
             print('Process terminated')
@@ -54,6 +66,15 @@ class LockerPoint:
             if not locker.isOccupied():
                 emptyLockers.append(locker)
         return emptyLockers 
+
+
+    @staticmethod
+    def searchPackage(lockerPoint, package):
+        keeper = None
+        for locker in lockerPoint.getLockers().values():
+            if package.getCode() == locker.getPackageCode():
+                keeper = locker
+        return keeper
 
 
     def getId(self):
