@@ -17,9 +17,9 @@ class LockerPoint:
 
         print('Processing package. . .')
 
-        if Package.isValid(package.getCode()): # Devuelve True o False
+        if Package.isValid(package.getCode()): #    Devuelve True o False
 
-            if package.getStatus() == 'NOT REGISTERED':
+            if package.getStatus() == 'NOT REGISTERED':    # Para dejar un paquete
 
                 emptyLockers = LockerPoint.searchEmptyLockers(lockerPoint)
 
@@ -34,7 +34,7 @@ class LockerPoint:
                     # 6. Tras 20 segundos, cerrar la taquilla.
                     # y marcar el paquete como 'keeping'.
                     print('Closing the opened locker...')
-                    time.sleep(5)
+                    time.sleep(20)
                     emptyLockers[0].setStatus('CLOSED')
 
                     lockerPoint.getLockers()['1'].setPackageCode(package.getCode())
@@ -47,13 +47,25 @@ class LockerPoint:
                 else:
                     print('There aren\'t any free lockers available at the moment.')
             
-            elif package.getStatus() == 'KEEPING':
+            elif package.getStatus() == 'KEEPING':    # Para recoger el paquete
+
                 keeper = LockerPoint.searchPackage(lockerPoint, package)
+
                 if keeper != None:
+
                     print('Opening the keeper locker...')
                     keeper.setStatus('OPENED')
                     assert lockerPoint.getLockers()['1'].getStatus() == 'OPENED'
                     print('Please, take the package and close the locker before leave.')
+                    
+                    print('Closing the opened locker...')
+                    time.sleep(20)
+                    keeper.setStatus('CLOSED')
+
+                    keeper.setPackageCode('')
+                    keeper.setOccupied(False)
+                    package.setStatus('PICKED UP')
+
                 else:
                     print('The package you are looking for is not being kept here')
                     print('Process terminated.')
