@@ -15,14 +15,16 @@ class LockerPoint:
     @staticmethod
     def processPackage(lockerPoint, package):
         print('Processing package. . .')
-        
+
         if Package.isValid(package.getId()): # Devuelve True o False
             if package.getStatus() == 'NOT REGISTERED':
                 emptyLockers = LockerPoint.searchEmptyLockers(lockerPoint)
                 # 4. Si existe alguna taquilla vacía, abrirla con setStatus('OPENED') 
-                # 5. En caso contrario, imprimir por pantalla
                 if emptyLockers != None and emptyLockers > 0:
-                    emptyLockers[0].setStatus('OPENED')
+                    emptyLockers[0].setStatus('OPENED')    
+                # 5. En caso contrario, imprimir por pantalla
+                else:
+                    print('There aren\'t any free lockers available at the moment.')
         else:
             print('Invalid code')
             print('Process terminated')
