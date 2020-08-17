@@ -37,7 +37,7 @@ class LockerPoint:
                     time.sleep(20)
                     emptyLockers[0].setStatus('CLOSED')
 
-                    lockerPoint.getLockers()['1'].setPackageCode(package.getCode())
+                    emptyLockers[0].setPackageCode(package.getCode())
                     emptyLockers[0].setOccupied(True)
                     package.setStatus('KEEPING')
 
